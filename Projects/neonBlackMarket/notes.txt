@@ -1,0 +1,125 @@
+1. Database Setup
+Create a PostgreSQL database (Docker environment)
+Connect using IntelliJ
+Organize all work in SQL files
+
+2. Table Design
+Primary Table (Starting Point)
+Create one table:
+
+security_logs_raw
+Requirements:
+
+Create one table
+Insert sample data (AI may be used)
+Minimum: 100 log records
+Deliverables
+
+[date]_created_security_logs_raw_table.sql
+[date]_seed_data_security_logs_raw_table.sql
+
+3. Normalization
+Create additional tables to organize repeating values such as:
+
+user_role (vendor, buyer, admin, analyst, moderator, guest)
+account_status (active, locked, suspended, disabled, pending)
+device_type (desktop, mobile, tablet, kiosk, server)
+operating_system (Windows, macOS, Linux, Android, iOS)
+browser_name (Chrome, Firefox, Edge, Safari, Tor)
+event_type (login, logout, password_change, purchase, file_access, account_update, admin_action)
+event_category (authentication, transaction, system, user_management, security)
+action_taken (allow, deny, block, flag, alert)
+status (success, failed, blocked, pending)
+severity (low, medium, high, critical)
+resource_type (user_account, product_listing, transaction_record, admin_panel, file_storage, api_endpoint)
+failure_reason (invalid_password, invalid_username, account_locked, insufficient_permissions, timeout, suspicious_activity, system_error)
+Requirements
+
+Use PRIMARY KEYS
+Use FOREIGN KEYS
+Enforce relationships and constraints
+Deliverable
+
+[date]_created_multiple_lookup_tables.sql
+
+4. Data Population
+Insert sample data into all tables (AI may be used)
+
+Minimum: 100 log records
+
+Requirements
+
+Include both:
+normal activity
+suspicious activity
+Deliverable
+
+[date]_seed_data_multiple_lookup_tables.sql
+
+5. Investigation Queries
+Create 20 queries that increase in complexity.
+
+Requirements
+
+20 total queries
+Each query must include a comment explaining:
+what is being investigated
+why it matters from a security perspective
+
+
+Easy
+Find all records where status is failed.
+Find all records where severity is high or critical.
+Find all records where account_status is locked.
+Find all records where watchlist_flag is true.
+List all login events ordered by event_time.
+Find the top 10 records with the highest risk_score.
+Count how many total records exist for each event_type.
+
+Medium
+Count how many failed events each username has.
+Count how many records exist for each ip_address.
+Count how many high or critical events exist for each username.
+Count how many failed events exist for each device_type.
+Count how many suspicious events exist for each location_country.
+Find the most common failure_reason values.
+Count how many records exist for each resource_type.
+Count how many records exist for each user_role and event_category combination.
+
+Harder
+Find ip_address values used by more than one username.
+Find usernames with both failed events and high-risk events.
+Find session_id values that contain multiple failed events.
+Find accounts marked locked or suspended that still show successful activity.
+Find usernames, IP addresses, or sessions where multiple risk indicators appear together (failed status, high severity, watchlist_flag, high risk_score).
+
+Deliverable
+[date]_20_queries.sql
+
+6. Final Deliverables
+[date]_created_security_logs_raw_table.sql
+[date]_seed_data_security_logs_raw_table.sql
+[date]_created_multiple_lookup_tables.sql
+[date]_seed_data_multiple_lookup_tables.sql
+[date]_20_queries.sql
+
+Final Note
+There is no single correct answer.
+
+What matters is:
+
+how you structure your data
+how you explore it
+how you justify your findings
+Your goal is to investigate a system where the truth is not obvious and must be uncovered through data.
+
+Optional SQL Header Example
+-- Query example header comment
+SELECT *
+FROM security_logs_raw
+WHERE status = 'failed'
+ORDER BY event_time DESC;
+
+
+
+
