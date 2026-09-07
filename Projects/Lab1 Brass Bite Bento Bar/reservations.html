@@ -1,0 +1,113 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brass & Bite Bento Bar | Reservations</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!--Navbar Start-->
+<header class="navbar-header">
+    <nav class="navbar">
+        <a href="index.html" class="logo-link">
+            <img src="./Assets/Images/Brass&BiteBentoBarLogo.png" alt="Brass & Bite Bento Bar Logo" class="nav-logo">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="menu.html"><i class="fa-solid fa-utensils"></i> Menu</a></li>
+            <li><a href="reservations.html" class="active"><i class="fa-solid fa-calendar-check"></i> Reservations</a></li>
+        </ul>
+    </nav>
+</header>
+<!--Navbar End-->
+<main class="container">
+    <section class="form-section">
+        <h2>Table Dispatch Request</h2>
+        <p class="reservation-notice">
+            Please note: All table requests are strictly <strong>Request Only</strong>. Due to high airship lounge traffic,
+            your reservation time will be verified and officially confirmed via mechanical steam-courier dispatch within two hours.
+        </p>
+<!--Form Start-->
+        <form action="#" method="post" class="reservation-form">
+            <div class="form-group">
+                <label for="full-name"><i class="fa-solid fa-user"></i> Full Name</label>
+                <input type="text" id="full-name" name="full_name" required maxlength="20" placeholder="e.g. Winston Barksworth">
+            </div>
+
+            <div class="form-group">
+                <label for="email"><i class="fa-solid fa-envelope"></i> Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="e.g. captain@airship.com">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group flex-1">
+                    <label for="party-size"><i class="fa-solid fa-users"></i> Party Size</label>
+                    <select id="party-size" name="party_size" required>
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                        <option value="5">5 Guests</option>
+                        <option value="6">6 Guests</option>
+                        <option value="7">7 Guests</option>
+                        <option value="8">8 Guests</option>
+                    </select>
+                </div>
+
+                <div class="form-group flex-1">
+                    <label for="res-date"><i class="fa-solid fa-calendar"></i> Date</label>
+                    <input type="date" id="res-date" name="reservation_date" required>
+                </div>
+
+                <div class="form-group flex-1">
+                    <label for="res-time"><i class="fa-solid fa-clock"></i> Time</label>
+                    <input type="time" id="res-time" name="reservation_time" required>
+                </div>
+            </div>
+
+            <fieldset class="form-fieldset">
+                <legend><i class="fa-solid fa-chair"></i> Seating Preference</legend>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="seating_preference" value="Indoor Steam Parlor" checked>
+                        Indoor Steam Parlor
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="seating_preference" value="Airship Deck">
+                        Airship Deck
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="seating_preference" value="Courier Bar">
+                        Courier Bar
+                    </label>
+                </div>
+            </fieldset>
+
+            <div class="form-group">
+                <label for="dietary-notes"><i class="fa-solid fa-pen-to-square"></i> Dietary Notes (Optional)</label>
+                <textarea id="dietary-notes" name="dietary_notes" maxlength="30" rows="3" placeholder="Max 30 characters..."></textarea>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <label class="checkbox-label" for="newsletter">
+                    <input type="checkbox" id="newsletter" name="newsletter_opt_in" value="yes">
+                    Dispatch weekly steam-courier menu updates
+                </label>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Transmit Request</button>
+                <button type="reset" class="btn btn-secondary"><i class="fa-solid fa-rotate-left"></i> Reset Form</button>
+            </div>
+        </form>
+    </section>
+</main>
+<!--Form End-->
+
+<footer class="footer">
+    <p>&copy; 2026 Brass & Bite Bento Bar. Operated under the authority of the Bulldog High Command.</p>
+</footer>
+
+</body>
+</html>
