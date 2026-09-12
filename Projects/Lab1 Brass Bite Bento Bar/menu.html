@@ -3,95 +3,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brass & Bite Bento Bar | Menu</title>
+    <!-- Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <!--Navbar Start-->
 <header class="navbar-header">
-    <nav class="navbar">
-        <a href="index.html" class="logo-link">
-            <img src="./Assets/Images/Brass&BiteBentoBarLogo.png" alt="Brass & Bite Bento Bar Logo" class="nav-logo">
-        </a>
-        <ul class="nav-links">
-            <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
-            <li><a href="menu.html" class="active"><i class="fa-solid fa-utensils"></i> Menu</a></li>
-            <li><a href="reservations.html"><i class="fa-solid fa-calendar-check"></i> Reservations</a></li>
-        </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid max-nav-width">
+            <a href="index.html" class="navbar-brand d-flex align-items-center gap-2">
+                <img src="./Assets/Images/Brass&BiteBentoBarLogo.png" alt="Brass & Bite Bento Bar Logo"
+                     class="nav-logo">
+                <span class="brand-title">Brass & Bite</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                    aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="mainNavbar">
+                <ul class="navbar-nav gap-lg-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="menu.html"><i class="fa-solid fa-utensils"></i> Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reservations.html"><i class="fa-solid fa-calendar-check"></i>
+                            Reservations</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
 </header>
 <!--Navbar End-->
-<main class="container">
-    <section class="menu-intro-section">
+<main class="container my-5">
+    <section class="menu-intro-section text-center mb-5">
         <h2>Artisanal Provisions</h2>
-        <p class="menu-intro-text">
-            Our menu features multi-tiered steam-infused bentos, slow-simmered brass-kettle broths, and custom culinary additions.
-            Engineered for airship captains, mechanical couriers, humans, and aristocratic bulldogs alike, all dishes are crafted
+        <p class="menu-intro-text text-muted mx-auto" style="max-width: 800px;">
+            Our menu features multi-tiered steam-infused bentos, slow-simmered brass-kettle broths, and custom culinary
+            additions.
+            Engineered for airship captains, mechanical couriers, humans, and aristocratic bulldogs alike, all dishes
+            are crafted
             fresh daily using local estate ingredients and thermal cooking mechanisms.
         </p>
 
-        <div class="featured-menu-img-wrapper">
-            <img src="./Assets/Images/Brass&BiteBentoBarBentoBoxHammeredTable.png" alt="A fully assembled steam bento box with brass kettle teas" class="featured-menu-img">
+        <div class="featured-menu-img-wrapper mx-auto" style="max-width: 650px;">
+            <img src="./Assets/Images/Brass&BiteBentoBarBentoBoxHammeredTable.png"
+                 alt="A fully assembled steam bento box with brass kettle teas"
+                 class="img-fluid featured-menu-img rounded shadow">
         </div>
     </section>
-<!--Table - Menu - Start-->
-    <section class="table-section">
-        <table class="menu-table">
+
+    <!-- Table Section -->
+    <section class="table-section table-responsive">
+        <table class="table table-hover align-middle menu-table">
             <caption>Brass & Bite Signature Bento Collections</caption>
-            <thead>
+            <thead class="table-dark">
             <tr>
-                <th scope="col"><i class="fa-solid fa-box-archive"></i> Combo</th>
-                <th scope="col"><i class="fa-solid fa-bowl-food"></i> Includes</th>
+                <th scope="col"><i class="fa-solid fa-box-archive"></i> Item Name</th>
+                <th scope="col"><i class="fa-solid fa-bowl-food"></i> Category & Description</th>
                 <th scope="col"><i class="fa-solid fa-coins"></i> Price</th>
-                <th scope="col"><i class="fa-solid fa-tag"></i> Notes</th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <td>The Cog & Sprocket Bento</td>
-                <td>Teriyaki glaze salmon, short-grain steamed rice, pressure-cooked edamame, rolled tamagoyaki</td>
-                <td>$22.50</td>
-                <td><span class="badge popular">Popular</span></td>
-            </tr>
-            <tr>
-                <td>Mechanized Marinated Ribs</td>
-                <td>Brass-roasted pork ribs, spiced sesame noodles, pickled radish, ginger-infused broccolini</td>
-                <td>$26.00</td>
-                <td><span class="badge spicy"><i class="fa-solid fa-pepper-hot"></i> Spicy</span></td>
-            </tr>
-            <tr>
-                <td>Airship Captain's Feast</td>
-                <td>Prime braised beef brisket, miso glazed eggplant, steamed gyoza, copper kettle marrow broth</td>
-                <td>$29.50</td>
-                <td><span class="badge chef-pick">Chef Pick</span></td>
-            </tr>
-            <tr>
-                <td>Steam-Puffed Tofu Delight</td>
-                <td>Crispy pressed tofu, roasted sweet potato, sesame wakame salad, lotus root chips</td>
-                <td>$19.00</td>
-                <td><span class="badge vegan"><i class="fa-solid fa-leaf"></i> Vegan</span></td>
-            </tr>
-            <tr>
-                <td>The Hound's Reserve</td>
-                <td>Unseasoned slow-simmered steak tips, steamed pumpkin purée, bone marrow reduction, fresh parsley</td>
-                <td>$21.00</td>
-                <td><span class="badge pup-safe"><i class="fa-solid fa-dog"></i> Pup-Safe</span></td>
-            </tr>
-            <tr>
-                <td>Pneumatic Pulled Poultry</td>
-                <td>Steam-shredded duck breast, plum dipping glaze, pickled mustard greens, scallion rice cakes</td>
-                <td>$24.00</td>
-                <td><span class="badge gluten-free">Gluten-Free</span></td>
-            </tr>
-            </tbody>
+            <!-- Empty tbody populated dynamically by script.js -->
+            <tbody id="menu-table-body"></tbody>
         </table>
     </section>
 </main>
-<!--Table - Menu - End-->
-<!--Footer-->
-<footer class="footer">
-    <p>&copy; 2026 Brass & Bite Bento Bar. Operated under the authority of the Bulldog High Command.</p>
+<footer class="footer py-3 text-center">
+    <p class="mb-0">&copy; 2026 Brass & Bite Bento Bar. Operated under the authority of the Bulldog High Command.</p>
 </footer>
+
+<!-- Bootstrap JS Bundle CDN -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JS -->
+<script src="script.js"></script>
 
 </body>
 </html>

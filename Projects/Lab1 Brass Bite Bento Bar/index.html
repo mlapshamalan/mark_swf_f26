@@ -3,64 +3,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brass & Bite Bento Bar | Home</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <!--Navbar Start-->
 <header class="navbar-header">
-    <nav class="navbar">
-        <a href="index.html" class="logo-link">
-            <img src="./Assets/Images/Brass&BiteBentoBarLogo.png" alt="Brass & Bite Bento Bar Logo" class="nav-logo">
-        </a>
-        <ul class="nav-links">
-            <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
-            <li><a href="menu.html"><i class="fa-solid fa-utensils"></i> Menu</a></li>
-            <li><a href="reservations.html"><i class="fa-solid fa-calendar-check"></i> Reservations</a></li>
-        </ul>
-    </nav>
-<!--    Navbar End-->
-</header>
-<main class="container">
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1>Brass & Bite Bento Bar</h1>
-            <p class="tagline">Steam-Driven Flavors for the Modern Canine & Crew</p>
-            <p class="hero-text">
-                Welcome to New London's premier steam-powered culinary depot. Founded by High Commander Winston Von
-                Barksworth,
-                our establishment bridges human innovation and bulldog industrialism inside a brass-riveted bento
-                paradise.
-            </p>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid max-nav-width">
+            <a href="index.html" class="navbar-brand d-flex align-items-center gap-2">
+                <img src="./Assets/Images/Brass&BiteBentoBarLogo.png" alt="Brass & Bite Bento Bar Logo" class="nav-logo">
+                <span class="brand-title">Brass & Bite</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="mainNavbar">
+                <ul class="navbar-nav gap-lg-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="menu.html"><i class="fa-solid fa-utensils"></i> Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reservations.html"><i class="fa-solid fa-calendar-check"></i> Reservations</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="hero-image-wrapper">
-            <img src="./Assets/Images/Brass&BiteBentoBarRestaraunt.png"
-                 alt="Interior view of Brass & Bite Bento Bar showing steam pipes and brass fittings" class="hero-img">
+    </nav>
+</header>
+<main class="container my-4 px-3">
+    <!-- Hero Section -->
+    <section class="hero-section p-4">
+        <div class="row align-items-center g-4 text-center text-lg-start">
+            <div class="col-12 col-lg-7 hero-content">
+                <h1 class="mb-3">Brass & Bite Bento Bar</h1>
+                <p class="tagline mb-3">Steam-Driven Flavors for the Modern Canine & Crew</p>
+                <p class="hero-text mb-0">
+                    Welcome to New London's premier steam-powered culinary depot. Founded by High Commander Winston Von
+                    Barksworth, our establishment bridges human innovation and bulldog industrialism inside a brass-riveted bento
+                    paradise.
+                </p>
+            </div>
+            <div class="col-12 col-lg-5 hero-image-wrapper">
+                <img src="./Assets/Images/Brass&BiteBentoBarRestaraunt.png"
+                     alt="Interior view of Brass & Bite Bento Bar showing steam pipes and brass fittings"
+                     class="img-fluid hero-img mx-auto">
+            </div>
         </div>
     </section>
-<!--Cards section-->
-    <section class="cards-section">
-        <h2 class="section-title">The Grand Experience</h2>
-        <div class="card-grid">
-            <article class="card">
-                <img src="./Assets/Images/Brass&BiteBentoBarBentoBoxToGo.jpeg"
-                     alt="Brass-heated bento compartments filled with steaming artisanal dishes" class="card-img">
-                <h3>Steam-Heated Compartments</h3>
-                <p>
-                    Every tier of our custom brass bento boxes is fed directly by subterranean steam pipes, keeping your
-                    short ribs tender and your steamed buns cloud-soft until the final bite.
-                </p>
-            </article>
 
-            <article class="card">
-                <img src="./Assets/Images/Brass&BiteBentoBarPneumaticDeliverySystem.png"
-                     alt="Action shot of Pneumatic Delivery Systems working" class="card-img">
-                <h3>Pneumatic Delivery System</h3>
-                <p>
-                    Watch automated brass shuttles streak across overhead rails, delivering fresh brews, bone broths,
-                    and polished cutlery directly to your table with mechanical precision.
-                </p>
-            </article>
+    <!-- Cards Section -->
+    <section class="cards-section">
+        <h2 class="section-title text-center mb-4">The Grand Experience</h2>
+        <div class="row g-4">
+            <div class="col-12 col-md-6 d-flex">
+                <article class="card w-100 p-4 text-center text-md-start">
+                    <img src="./Assets/Images/Brass&BiteBentoBarBentoBoxToGo.jpeg"
+                         alt="Brass-heated bento compartments filled with steaming artisanal dishes"
+                         class="card-img-top mb-3 card-img mx-auto">
+                    <div class="card-body px-0">
+                        <h3>Steam-Heated Compartments</h3>
+                        <p class="mb-0">
+                            Every tier of our custom brass bento boxes is fed directly by subterranean steam pipes, keeping your
+                            short ribs tender and your steamed buns cloud-soft until the final bite.
+                        </p>
+                    </div>
+                </article>
+            </div>
+            <div class="col-12 col-md-6 d-flex">
+                <article class="card w-100 p-4 text-center text-md-start">
+                    <img src="./Assets/Images/Brass&BiteBentoBarPneumaticDeliverySystem.png"
+                         alt="Action shot of Pneumatic Delivery Systems working"
+                         class="card-img-top mb-3 card-img mx-auto">
+                    <div class="card-body px-0">
+                        <h3>Pneumatic Delivery System</h3>
+                        <p class="mb-0">
+                            Watch automated brass shuttles streak across overhead rails, delivering fresh brews, bone broths,
+                            and polished cutlery directly to your table with mechanical precision.
+                        </p>
+                    </div>
+                </article>
+            </div>
         </div>
     </section>
 </main>
@@ -68,6 +98,9 @@
 <footer class="footer">
     <p>&copy; 2026 Brass & Bite Bento Bar. Operated under the authority of the Bulldog High Command.</p>
 </footer>
-
+<!--Bootstrap JS Bundle-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!--Custom Script-->
+<script src="script.js"></script>
 </body>
 </html>
