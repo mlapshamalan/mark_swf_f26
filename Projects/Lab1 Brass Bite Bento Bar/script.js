@@ -1,214 +1,243 @@
-const MENU_ITEMS = [{
-    id: 1,
-    name: "Gear-Griddle Bento",
-    description: "Crisp rice, smoked tofu, brass-pepper glaze.",
-    price: 12.50,
-    category: "Breakfast"
-}, {
-    id: 2,
-    name: "Clockwork Porridge",
-    description: "Steel-cut oats, cinnamon steam-apples, copper-kettle honey.",
-    price: 9.00,
-    category: "Breakfast"
-}, {
-    id: 3,
-    name: "Pneumatic Pancake Stack",
-    description: "Fluffy buttermilk cakes, spiced maple drizzle, marrow butter.",
-    price: 14.00,
-    category: "Breakfast"
-}, {
-    id: 4,
-    name: "Cog & Sprocket Salmon Bento",
-    description: "Teriyaki glaze salmon, short-grain steamed rice, pressure-cooked edamame.",
-    price: 22.50,
-    category: "Lunch"
-}, {
-    id: 5,
-    name: "Mechanized Marinated Ribs",
-    description: "Brass-roasted pork ribs, spiced sesame noodles, pickled radish.",
-    price: 26.00,
-    category: "Lunch"
-}, {
-    id: 6,
-    name: "Pneumatic Pulled Poultry",
-    description: "Steam-shredded duck breast, plum dipping glaze, pickled mustard greens.",
-    price: 24.00,
-    category: "Lunch"
-}, {
-    id: 7,
-    name: "Steam-Puffed Tofu Delight",
-    description: "Crispy pressed tofu, roasted sweet potato, sesame wakame salad.",
-    price: 19.00,
-    category: "Lunch"
-}, {
-    id: 8,
-    name: "Airship Captain's Feast",
-    description: "Prime braised beef brisket, miso glazed eggplant, steamed gyoza.",
-    price: 29.50,
-    category: "Dinner"
-}, {
-    id: 9,
-    name: "The Hound's Reserve",
-    description: "Unseasoned slow-simmered steak tips, steamed pumpkin purée, bone marrow reduction.",
-    price: 21.00,
-    category: "Dinner"
-}, {
-    id: 10,
-    name: "Pressure-Vessel Black Cod",
-    description: "Miso-marinated black cod, lotus root chips, steam-dusted scallions.",
-    price: 31.00,
-    category: "Dinner"
-}];
+/**
+ * Brass & Bite Bento Bar - Master Application Logic
+ */
 
-// Price Formatting
-const currencyFormatter = new Intl.NumberFormat("en-US", {
-    style: "currency", currency: "USD"
+// Global currency formatter required by Rubric B1
+const currencyFormatter = new Intl.NumberFormat('en-US', {
+    style: 'currency', currency: 'USD'
 });
 
-// Dom Rendering
-document.addEventListener("DOMContentLoaded", () => {
-    const tableBody = document.getElementById("menu-table-body");
+// Built-in menu data (Acts as instant fallback if fetch is blocked locally)
+const fallbackMenuItems = [{
+    name: "Gear-Griddle Bento",
+    description: "Crisp rice patties, smoked tofu, and brass-pepper glaze.",
+    price: 12.50,
+    category: "Breakfast",
+    img: "Gear-Griddle Bento.jpeg"
+}, {
+    name: "Clockwork Porridge",
+    description: "Steel-cut oat grains infused with cinnamon and steam-drizzled honey.",
+    price: 10.00,
+    category: "Breakfast",
+    img: "Clockwork-Porridge.jpeg"
+}, {
+    name: "Pneumatic Pancake Stack",
+    description: "Air-fluffed cakes served with copper-spout maple reduction.",
+    price: 11.50,
+    category: "Breakfast",
+    img: "pneumatic-Pancake-Stack.jpeg"
+}, {
+    name: "Cog & Sprocket Salmon Bento",
+    description: "Pan-seared Atlantic salmon with ginger glaze and radish gears.",
+    price: 18.00,
+    category: "Lunch",
+    img: "cogAndSprocketSalmonBento.jpeg"
+}, {
+    name: "Pneumatic Pulled Poultry",
+    description: "Slow-pressurized chicken topped with spiced slaw on brioche.",
+    price: 15.50,
+    category: "Lunch",
+    img: "pneumaticPulledPoultry.jpeg"
+}, {
+    name: "Steam-Puffed Tofu Delight",
+    description: "Flash-steamed artisanal tofu with sesame, scallions, and tamari.",
+    price: 14.00,
+    category: "Lunch",
+    img: "Steam-PuffedTofuDelight.jpeg"
+}, {
+    name: "Airship Captain's Feast",
+    description: "Grand bento featuring wagyu steak strips, tempura greens, and rice.",
+    price: 28.00,
+    category: "Dinner",
+    img: "airshipCaptain'sFeast.jpeg"
+}, {
+    name: "Mechanized Marinated Ribs",
+    description: "Kurobuta pork ribs marinated in star anise and dark soy glaze.",
+    price: 22.00,
+    category: "Dinner",
+    img: "mechanizedMarinatedRibs.jpeg"
+}, {
+    name: "Pressure Vessel Black Cod",
+    description: "Miso-cured black cod cooked in high-pressure copper steamers.",
+    price: 26.50,
+    category: "Dinner",
+    img: "pressureVesselBlackCod.jpeg"
+}, {
+    name: "The Hound's Reserve",
+    description: "Unseasoned boiled marrow bones and beef cuts prepared for canine officers.",
+    price: 13.00,
+    category: "Dinner",
+    img: "theHoundsReserve.jpeg"
+}];
 
-    // Check if we are on menu.html
-    if (tableBody) {
-        renderMenuItems(MENU_ITEMS, tableBody);
+let menuItems = [];
+let filteredMenu = [];
+let currentIndex = 0;
+
+document.addEventListener("DOMContentLoaded", () => {
+    if (document.getElementById("carouselCard")) {
+        initMenuCarousel();
+    }
+
+    if (document.getElementById("reservation-form")) {
+        initReservationValidation();
     }
 });
 
-function renderMenuItems(items, container) {
-    container.innerHTML = ""; // Clear existing content
+/* ==========================================
+   1. Menu Carousel & Filtering (Rubric B1)
+   ========================================== */
+async function initMenuCarousel() {
+    try {
+        const res = await fetch("menu.json");
+        if (!res.ok) throw new Error("Fetch failed");
+        menuItems = await res.json();
+    } catch (e) {
+        console.warn("Using fallback menu array (local file execution active):", e);
+        menuItems = fallbackMenuItems;
+    }
 
-    items.forEach(item => {
-        const row = document.createElement("tr");
+    filteredMenu = [...menuItems];
+    renderCarouselItem();
 
-        row.innerHTML = `
-            <td><strong>${item.name}</strong></td>
-            <td><span class="badge bg-secondary mb-1">${item.category}</span><br>${item.description}</td>
-            <td>${currencyFormatter.format(item.price)}</td>
-        `;
+    document.getElementById("prevBtn").addEventListener("click", prevImage);
+    document.getElementById("nextBtn").addEventListener("click", nextImage);
 
-        container.appendChild(row);
+    document.getElementById("categoryFilter").addEventListener("change", (e) => {
+        const cat = e.target.value;
+        if (cat === "All") {
+            filteredMenu = [...menuItems];
+        } else {
+            filteredMenu = menuItems.filter(item => item.category === cat);
+        }
+        currentIndex = 0;
+        renderCarouselItem();
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    // Menu rendering check (existing)
-    const tableBody = document.getElementById("menu-table-body");
-    if (tableBody) {
-        renderMenuItems(MENU_ITEMS, tableBody);
+function renderCarouselItem() {
+    if (filteredMenu.length === 0) return;
+    const item = filteredMenu[currentIndex];
+
+    const imgElem = document.getElementById("carouselImg");
+    imgElem.src = `images/${item.img}`;
+    imgElem.alt = item.name;
+
+    document.getElementById("carouselTitle").textContent = item.name;
+    document.getElementById("carouselDesc").textContent = item.description;
+    document.getElementById("carouselBadge").textContent = item.category;
+
+    // Format price using Intl.NumberFormat
+    document.getElementById("carouselPrice").textContent = currencyFormatter.format(item.price);
+}
+
+function prevImage() {
+    if (filteredMenu.length === 0) return;
+    currentIndex = (currentIndex - 1 + filteredMenu.length) % filteredMenu.length;
+    renderCarouselItem();
+}
+
+function nextImage() {
+    if (filteredMenu.length === 0) return;
+    currentIndex = (currentIndex + 1) % filteredMenu.length;
+    renderCarouselItem();
+}
+
+/* ==========================================
+   2. Reservation Form Validation (Rubric B2)
+   ========================================== */
+function initReservationValidation() {
+    const form = document.getElementById("reservation-form");
+    const dietaryInput = document.getElementById("res-dietary");
+    const charCounter = document.getElementById("char-counter");
+
+    if (dietaryInput && charCounter) {
+        dietaryInput.addEventListener("input", () => {
+            const remaining = 30 - dietaryInput.value.length;
+            charCounter.textContent = remaining;
+        });
     }
 
-    // Reservation form validation check
-    const resForm = document.getElementById("reservation-form");
-    if (resForm) {
-        resForm.addEventListener("submit", handleReservationSubmit);
-    }
-});
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const alertBox = document.getElementById("alert-container");
+        alertBox.innerHTML = "";
 
-function handleReservationSubmit(event) {
-    event.preventDefault(); // Prevent page reload / default submit behavior
+        const name = document.getElementById("res-name").value.trim();
+        const email = document.getElementById("res-email").value.trim();
+        const partySize = document.getElementById("res-party").value;
+        const date = document.getElementById("res-date").value;
+        const time = document.getElementById("res-time").value;
+        const seatingElem = document.querySelector('input[name="seating"]:checked');
+        const seating = seatingElem ? seatingElem.value : null;
+        const dietaryNotes = dietaryInput ? dietaryInput.value.trim() : "";
+        const newsletter = document.getElementById("res-newsletter") ? document.getElementById("res-newsletter").checked : false;
 
-    const alertContainer = document.getElementById("alert-container");
-    alertContainer.innerHTML = ""; // Clear previous alert messages
+        const errors = [];
 
-    const errors = [];
+        if (!name || name.length > 20) {
+            errors.push("Full Name is required and must be 20 characters or fewer.");
+        }
 
-    // Extract values
-    const fullName = document.getElementById("full-name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const partySize = document.getElementById("party-size").value;
-    const date = document.getElementById("res-date").value;
-    const time = document.getElementById("res-time").value;
-    const selectedSeating = document.querySelector('input[name="seating_preference"]:checked');
-    const dietaryNotes = document.getElementById("dietary-notes").value.trim();
-    const newsletter = document.getElementById("newsletter").checked;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+            errors.push("A valid telegraph email address is required.");
+        }
 
-    // --- Validation Rules ---
-    // 1. Name: required, max 20 chars
-    if (!fullName) {
-        errors.push("Full Name is required.");
-    } else if (fullName.length > 20) {
-        errors.push("Full Name must not exceed 20 characters.");
-    }
+        if (!partySize) {
+            errors.push("Please select a party size (1–8).");
+        }
 
-    // 2. Email: required & basic pattern check
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email) {
-        errors.push("Email address is required.");
-    } else if (!emailRegex.test(email)) {
-        errors.push("Please enter a valid email address.");
-    }
+        if (!date) {
+            errors.push("Reservation date is required.");
+        }
 
-    // 3. Party Size: required (1-8)
-    const partyNum = parseInt(partySize, 10);
-    if (!partySize || isNaN(partyNum) || partyNum < 1 || partyNum > 8) {
-        errors.push("Please select a valid party size (1–8 guests).");
-    }
+        if (!time) {
+            errors.push("Reservation time is required.");
+        }
 
-    // 4. Date: required
-    if (!date) {
-        errors.push("Reservation date is required.");
-    }
+        if (!seating) {
+            errors.push("Please select a seating preference.");
+        }
 
-    // 5. Time: required
-    if (!time) {
-        errors.push("Reservation time is required.");
-    }
+        if (dietaryNotes.length > 30) {
+            errors.push("Dietary notes must not exceed 30 characters.");
+        }
 
-    // 6. Seating: required
-    if (!selectedSeating) {
-        errors.push("Please select a seating preference.");
-    }
+        if (errors.length > 0) {
+            alertBox.innerHTML = `
+                <div class="alert alert-danger" role="alert">
+                    ${errors.join("<br>")}
+                </div>
+            `;
+        } else {
+            const formData = {
+                name, email, partySize: Number(partySize), date, time, seating, dietaryNotes, newsletter
+            };
 
-    // 7. Dietary Notes: optional, max 30 chars
-    if (dietaryNotes.length > 30) {
-        errors.push("Dietary notes must not exceed 30 characters.");
-    }
+            // Log object to console as JSON (Rubric Requirement B2)
+            console.log("Reservation Submitted as JSON:", JSON.stringify(formData, null, 2));
 
-    // --- Display Alert Results (Requirement C3) ---
-    if (errors.length > 0) {
-        // Create Bootstrap Error Alert (.alert.alert-danger)
-        const errorAlert = document.createElement("div");
-        errorAlert.className = "alert alert-danger alert-dismissible fade show";
-        errorAlert.setAttribute("role", "alert");
-
-        const errorListHtml = errors.map(err => `<li>${err}</li>`).join("");
-        errorAlert.innerHTML = `
-            <strong><i class="fa-solid fa-triangle-exclamation me-2"></i>Transmission Error!</strong> Please correct the following:
-            <ul class="mb-0 mt-2 ps-3">${errorListHtml}</ul>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            alertBox.innerHTML = `
+                <div class="alert alert-success" role="alert">
+                    Dispatch Confirmed! Check developer console to view transmitted JSON.
+                </div>
+            `;
+            form.reset();
+            if (charCounter) charCounter.textContent = "30";
+        }
+        const hiringForm = document.getElementById("hiring-form");
+        if (hiringForm) {
+            hiringForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const alertBox = document.getElementById("hiring-alert-container");
+                alertBox.innerHTML = `
+            <div class="alert alert-success" role="alert">
+                Enlistment Dossier Transmitted! The High Command will review your credentials.
+            </div>
         `;
-
-        alertContainer.appendChild(errorAlert);
-    } else {
-        // Build required payload object (Requirement C4)
-        const reservationPayload = {
-            name: fullName,
-            email: email,
-            partySize: partyNum,
-            date: date,
-            time: time,
-            seating: selectedSeating.value,
-            dietaryNotes: dietaryNotes,
-            newsletter: newsletter
-        };
-
-        // Log required object to browser console
-        console.log("Reservation Request Transmitted Successfully:", reservationPayload);
-
-        // Create Bootstrap Success Alert (.alert.alert-success)
-        const successAlert = document.createElement("div");
-        successAlert.className = "alert alert-success alert-dismissible fade show";
-        successAlert.setAttribute("role", "alert");
-        successAlert.innerHTML = `
-            <strong><i class="fa-solid fa-circle-check me-2"></i>Dispatch Received!</strong> 
-            Your reservation request for <strong>${partyNum} guest(s)</strong> on <strong>${date}</strong> at <strong>${time}</strong> has been logged and transmitted to High Command.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        `;
-
-        alertContainer.appendChild(successAlert);
-
-        // Reset form upon success
-        event.target.reset();
-    }
+                hiringForm.reset();
+            });
+        }
+    });
 }
