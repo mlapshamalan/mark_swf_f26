@@ -1,0 +1,113 @@
+/* ==========================================
+   Brass & Bite Bento Bar - Master Stylesheet
+   ========================================== */
+
+/* Design Tokens & CSS Variables */
+:root {
+  --brass-accent: #d4af37;
+  --bg-dark: #1a1a1a;
+  --text-light: #f8f9fa;
+}
+
+/* Global Reset & Base Layout */
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--text-light);
+  background-color: var(--bg-dark);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Page Background Images with Solid Color Fallbacks */
+body.home-page {
+  background: var(--bg-dark) linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)) url('/images/bg-home.png') no-repeat fixed center center;
+  background-size: cover;
+}
+
+body.about-page {
+  background: var(--bg-dark) linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)) url('/images/bg-about.png') no-repeat fixed center center;
+  background-size: cover;
+}
+
+body.menu-page {
+  background: var(--bg-dark) linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)) url('/images/bg-menu.png') no-repeat fixed center center;
+  background-size: cover;
+}
+
+body.reservations-page {
+  background: var(--bg-dark) linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)) url('/images/bg-reservations.png') no-repeat fixed center center;
+  background-size: cover;
+}
+
+body.error-page, body.hiring-page {
+  background: var(--bg-dark) linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)) url('/images/bg-hiring.png') no-repeat fixed center center;
+  background-size: cover;
+}
+
+/* Header, Navigation & Steampunk Typography */
+.navbar-brand, .brand-title, .nav-link, h1, h2, h3, .page-heading {
+  font-family: 'Cinzel Decorative', cursive, serif;
+}
+
+.max-nav-width {
+  max-width: 1200px;
+}
+
+.nav-link {
+  color: var(--text-light) !important;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--brass-accent) !important;
+}
+
+/* Card & Carousel Enhancements */
+#carouselCard {
+  border-color: var(--brass-accent) !important;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+#carouselImg {
+  max-height: 380px;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* Form Controls & Theme Overrides */
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+  border-color: var(--brass-accent) !important;
+  box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25) !important;
+}
+
+.form-fieldset {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Buttons */
+.btn-warning {
+  background-color: var(--brass-accent);
+  border-color: var(--brass-accent);
+  color: #1a1a1a;
+}
+
+.btn-warning:hover {
+  background-color: #b8972e;
+  border-color: #b8972e;
+}
+
+.btn-outline-warning {
+  color: var(--brass-accent);
+  border-color: var(--brass-accent);
+}
+
+.btn-outline-warning:hover {
+  background-color: var(--brass-accent);
+  color: #1a1a1a;
+}
