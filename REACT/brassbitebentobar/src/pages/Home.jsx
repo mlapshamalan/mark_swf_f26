@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import bgHome from '../assets/images/bg-home.png';
 
@@ -12,7 +12,6 @@ export default function Home() {
             }}
         >
             <main className="container my-5 text-light d-flex flex-column justify-content-center">
-                {/* Hero Section */}
                 <section className="text-center py-5 bg-dark bg-opacity-75 border border-warning rounded shadow-lg p-4 mx-auto my-auto" style={{ maxWidth: '900px' }}>
                     <img
                         src="/images/Brass&BiteBentoBarLogo.png"
